@@ -93,7 +93,6 @@ export default {
     },
   },
   created() {
-    console.log(this.$route);
     this.$store.dispatch('movie/searchMovieWithId', {
       // movie/tt123567
       id: this.$route.params.id,
@@ -213,6 +212,34 @@ export default {
       color: $black;
       font-family: 'Oswald', sans-serif;
       font-size: 20px;
+    }
+  }
+  @include media-breakpoint-down(xl) {
+    .poster {
+      width: 300px;
+      height: 300px * 3 / 2;
+      margin-right: 40px;
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    display: block;
+    .poster {
+      margin-bottom: 40px;
+    }
+  }
+  @include media-breakpoint-down(md) {
+    .specs {
+      .title {
+        font-size: 50px;
+      }
+      .ratings {
+        .rating-wrap {
+          display: block;
+          .rating {
+            margin-top: 10px;
+          }
+        }
+      }
     }
   }
 }
