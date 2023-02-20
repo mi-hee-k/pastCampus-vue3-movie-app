@@ -1,8 +1,8 @@
 <template>
   <header>
     <Logo />
-    <ul class="nav nav-pills">
-      <li class="nav-item" v-for="nav in navigations" :key="nav.name">
+    <div class="nav nav-pills">
+      <div v-for="nav in navigations" :key="nav.name" class="nav-item">
         <RouterLink
           :to="nav.href"
           active-class="active"
@@ -11,8 +11,8 @@
         >
           {{ nav.name }}
         </RouterLink>
-      </li>
-    </ul>
+      </div>
+    </div>
     <div class="user" @click="toAbout">
       <img :src="image" :alt="name" />
     </div>
@@ -20,7 +20,9 @@
 </template>
 
 <script>
-import Logo from './Logo.vue';
+import { mapState } from 'vuex';
+import Logo from '~/components/Logo';
+
 export default {
   components: {
     Logo,
@@ -45,12 +47,7 @@ export default {
     };
   },
   computed: {
-    image() {
-      return this.$store.state.about.image;
-    },
-    name() {
-      return this.$store.state.about.name;
-    },
+    ...mapState('about', ['image', 'name']),
   },
   methods: {
     isMatch(path) {
@@ -65,15 +62,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~/scss/main';
 header {
   height: 70px;
-  padding: 0 40px;
   display: flex;
   align-items: center;
+  padding: 0 40px;
   position: relative;
   .logo {
     margin-right: 40px;
+  }
+  .nav-link {
+    color: $primary;
   }
   .user {
     width: 40px;
